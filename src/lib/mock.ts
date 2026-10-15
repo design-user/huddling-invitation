@@ -21,10 +21,11 @@ export type MockRSVP = {
 
 export const mockInvitation = {
   id: "demo",
-  title: "허들링 클럽 2번째 오프라인 밋업",
-  dateTime: "2026-11-14T09:00:00+09:00",
-  location: "서울특별시 성동구 성수이로 00, 허들링 라운지",
-  body: "함께 모여 이야기 나누고 즐거운 시간을 보내요. 편한 마음으로 참석해주세요!",
+  title: "허들링 클럽 네트워킹",
+  dateTime: "2026-12-19T18:00:00+09:00",
+  location: "Zoom Meeting",
+  body:
+    "생성형 AI로 디자인하다가 \"멈칫\"한 순간, 있으셨나요?\n\n허들링 클럽 네트워킹은 그 순간을 나누는 모임이에요.\n잘 된 결과물보다 막히고 헤맸던 과정을 이야기해요.\n\n디자이너라면 누구나 환영해요.\n정답을 몰라도, 실패한 경험이어도 괜찮아요.\n누군가의 시행착오가 다른 누군가에게는 기회가 되니까요.\n\n편하게, 솔직하게 이야기 나눠요.",
 } satisfies MockInvitation;
 
 export const mockResponses = [

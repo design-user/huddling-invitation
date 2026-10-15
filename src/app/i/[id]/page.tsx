@@ -27,6 +27,7 @@ export default async function InvitationPage({
         className="max-w-none rounded-none"
         date={dateTime}
         location={invitation.location}
+        subtitle="Huddling Club Networking"
         title={invitation.title}
       />
 
