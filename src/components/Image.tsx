@@ -24,7 +24,7 @@ export default function Image({
     <NextImage
       alt={alt}
       aria-hidden={alt ? undefined : true}
-      className={`object-cover ${isFlag ? "size-12 rounded-scaled-media" : "size-50"} ${className}`}
+      className={`object-cover ${isFlag ? "size-12 rounded-scaled-media" : "aspect-square w-50 max-w-full"} ${className}`}
       data-name="Image"
       height={isFlag ? 48 : 201}
       src={imageSources[type]}

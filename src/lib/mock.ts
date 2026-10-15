@@ -15,10 +15,12 @@ export type MockRSVP = {
   status: RSVPStatus;
   // 본인을 뺀 동반 인원. 참석 인원 합계 = 참석자 수 + 동반 인원 합
   companionCount: number;
+  // 응답한 시각 (ISO 형식, 한국 시간)
+  createdAt: string;
 };
 
 export const mockInvitation = {
-  id: "mock-invitation",
+  id: "demo",
   title: "허들링 클럽 2번째 오프라인 밋업",
   dateTime: "2026-11-14T09:00:00+09:00",
   location: "서울특별시 성동구 성수이로 00, 허들링 라운지",
@@ -32,6 +34,7 @@ export const mockResponses = [
     name: "김허들",
     status: "yes",
     companionCount: 2,
+    createdAt: "2026-10-12T14:03:00+09:00",
   },
   {
     id: "mock-response-2",
@@ -39,6 +42,7 @@ export const mockResponses = [
     name: "이예빈",
     status: "no",
     companionCount: 0,
+    createdAt: "2026-10-12T15:20:00+09:00",
   },
   {
     id: "mock-response-3",
@@ -46,5 +50,6 @@ export const mockResponses = [
     name: "박모임",
     status: "yes",
     companionCount: 0,
+    createdAt: "2026-10-13T09:41:00+09:00",
   },
 ] satisfies MockRSVP[];

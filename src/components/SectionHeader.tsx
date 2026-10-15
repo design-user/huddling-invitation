@@ -19,7 +19,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div
-      className={`flex w-full flex-col items-center gap-stack-md text-center ${className}`}
+      className={`flex w-full flex-col items-center gap-stack-md break-keep wrap-break-word text-center ${className}`}
       data-name="SectionHeader"
     >
       {showSubtitle && (

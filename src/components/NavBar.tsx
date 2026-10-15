@@ -20,7 +20,7 @@ export default function NavBar({
       data-name="NavBar"
     >
       {left ?? <IconNone />}
-      <p className="min-w-0 flex-1 text-center typography-heading-md tracking-preserved-1 text-guide-text-preserved-1">
+      <p className="min-w-0 flex-1 break-keep text-center typography-heading-md tracking-preserved-1 text-guide-text-preserved-1">
         {title}
       </p>
       {right ?? <IconNone />}

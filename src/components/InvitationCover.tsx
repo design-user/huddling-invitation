@@ -24,26 +24,22 @@ export default function InvitationCover({
         <p className="w-full typography-body-md font-medium opacity-60">
           {subtitle}
         </p>
-        <h1 className="w-full whitespace-pre-line typography-title-lg">
+        <h1 className="w-full whitespace-pre-line break-keep wrap-break-word typography-title-lg">
           {title}
         </h1>
       </div>
-      <Image
-        alt=""
-        className="size-50"
-        type="character"
-      />
+      <Image alt="" type="character" />
       <div className="flex w-full min-w-0 flex-col items-center justify-center gap-inline-md text-center">
         <span className="rounded-control bg-info-subtle px-inline-compact py-inline-xs typography-caption-md font-semibold text-info-strong">
           일시
         </span>
-        <p className="w-full typography-body-md font-medium">{date}</p>
+        <p className="w-full break-keep wrap-break-word typography-body-md font-medium">{date}</p>
       </div>
       <div className="flex w-full min-w-0 flex-col items-center justify-center gap-inline-md text-center">
         <span className="rounded-control bg-info-subtle px-inline-compact py-inline-xs typography-caption-md font-semibold text-info-strong">
           장소
         </span>
-        <p className="w-full typography-body-md font-medium">{location}</p>
+        <p className="w-full break-keep wrap-break-word typography-body-md font-medium">{location}</p>
       </div>
     </section>
   );

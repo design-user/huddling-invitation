@@ -6,7 +6,7 @@ import RSVPCard from "@/components/RSVPCard";
 import { formatDateTime } from "@/lib/format";
 import { mockInvitation } from "@/lib/mock";
 
-// 지금은 가짜 데이터(mock-invitation) 1개만 미리 만든다
+// 지금은 가짜 데이터(demo) 1개만 미리 만든다
 export async function generateStaticParams() {
   return [{ id: mockInvitation.id }];
 }
@@ -22,7 +22,7 @@ export default async function InvitationPage({
   const dateTime = formatDateTime(invitation.dateTime);
 
   return (
-    <div className="mx-auto flex w-full max-w-[375px] flex-col bg-surface-default">
+    <div className="mx-auto flex w-full max-w-mobile flex-col bg-surface-default">
       <InvitationCover
         className="max-w-none rounded-none"
         date={dateTime}
@@ -32,7 +32,7 @@ export default async function InvitationPage({
 
       <div className="flex flex-col items-center gap-stack-md px-page-horizontal py-cover-inset">
         <Image alt="" type="flag" />
-        <p className="w-full whitespace-pre-line break-words text-center typography-body-compact tracking-preserved-1 text-guide-text-preserved-1">
+        <p className="w-full whitespace-pre-line break-keep wrap-break-word text-center typography-body-compact tracking-preserved-1 text-guide-text-preserved-1">
           {invitation.body}
         </p>
       </div>

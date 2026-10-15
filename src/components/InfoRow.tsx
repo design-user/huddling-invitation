@@ -36,7 +36,9 @@ export default function InfoRow({
         {label}
       </span>
       <span aria-hidden="true" className="h-guide-row w-px bg-border-default" />
-      <span className="typography-label-lg text-text-strong">{value}</span>
+      <span className="min-w-0 break-keep wrap-break-word typography-label-lg text-text-strong">
+        {value}
+      </span>
     </div>
   );
 }

@@ -1,16 +1,27 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "@/components/Button";
+import CopyLinkField from "@/components/CopyLinkField";
 import Image from "@/components/Image";
 import InfoRow from "@/components/InfoRow";
 import Input from "@/components/Input";
 import InvitationCover from "@/components/InvitationCover";
 import Label from "@/components/Label";
 import NavBar from "@/components/NavBar";
+import SuccessIcon from "@/components/SuccessIcon";
 import Textarea from "@/components/Textarea";
+import { mockInvitation } from "@/lib/mock";
+
+// 아직 저장 기능이 없어서, 발행하면 mock 초대장(demo) 주소를 보여준다
+const invitationPath = `/i/${mockInvitation.id}`;
+const responsesPath = `${invitationPath}/responses`;
 
 export default function CreatePage() {
+  const router = useRouter();
+  // 발행 후 보여줄 사이트 주소 (예: http://localhost:3000). 비어 있으면 아직 발행 전
+  const [publishedOrigin, setPublishedOrigin] = useState("");
   const [title, setTitle] = useState("");
   const [dateTime, setDateTime] = useState("");
   const [location, setLocation] = useState("");
@@ -21,11 +32,56 @@ export default function CreatePage() {
     (value) => value.trim() !== "",
   );
 
+  function handlePublish() {
+    if (!isFilled) return;
+    setPublishedOrigin(window.location.origin);
+    window.scrollTo(0, 0);
+  }
+
+  // 발행 완료 상태: 같은 화면에서 링크 2개를 보여준다 (Figma 2168-910)
+  if (publishedOrigin) {
+    return (
+      <div className="mx-auto flex w-full max-w-mobile flex-col gap-page-horizontal bg-surface-default">
+        <NavBar title="발행 완료" />
+
+        <main className="flex flex-col gap-section-lg px-page-horizontal pb-cover-inset">
+          <div className="flex flex-col items-center gap-stack-sm py-stack-lg text-center">
+            <SuccessIcon />
+            <h1 className="typography-title-lg text-text-strong">
+              초대장이 발행됐어요!
+            </h1>
+            <p className="typography-body-md text-text-secondary">
+              아래 두 링크를 복사해 두세요.
+            </p>
+          </div>
+
+          <CopyLinkField
+            description="게스트에게 공유하는 링크예요."
+            title="초대장 링크"
+            url={`${publishedOrigin}${invitationPath}`}
+          />
+          <CopyLinkField
+            description="호스트용이에요. 이 링크를 아는 사람은 응답 목록을 볼 수 있어요."
+            title="응답 현황 링크"
+            url={`${publishedOrigin}${responsesPath}`}
+          />
+
+          <Button
+            className="w-full"
+            label="내 초대장 보기"
+            onClick={() => router.push(invitationPath)}
+            size="lg"
+          />
+        </main>
+      </div>
+    );
+  }
+
   return (
-    <div className="mx-auto flex w-full max-w-[375px] flex-col bg-surface-default">
+    <div className="mx-auto flex w-full max-w-mobile flex-col bg-surface-default">
       <NavBar title="초대장 만들기" />
 
-      <main className="flex flex-col gap-section-lg px-page-horizontal pb-[calc(var(--spacing-cover-inset)+var(--spacing-button-lg)+2*var(--spacing-page-horizontal))]">
+      <main className="flex flex-col gap-section-lg px-page-horizontal pb-fixed-cta-inset">
         <form
           className="flex flex-col gap-stack-lg"
           onSubmit={(event) => event.preventDefault()}
@@ -33,6 +89,7 @@ export default function CreatePage() {
           <Textarea
             helper="엔터로 줄을 나눌 수 있어요 · 최대 2줄"
             label="제목"
+            maxLength={40}
             name="title"
             onChange={(event) =>
               // 제목은 최대 2줄까지만 받는다
@@ -71,7 +128,12 @@ export default function CreatePage() {
           <Label label="미리보기" required={false} />
 
           {/* 미리보기는 입력한 값을 그대로 보여주는 스크롤 영역 */}
-          <div className="h-[516px] overflow-y-auto rounded-control border border-border-subtle">
+          <div
+            aria-label="미리보기"
+            className="h-preview-frame overflow-y-auto rounded-control border border-border-subtle"
+            role="region"
+            tabIndex={0}
+          >
             <InvitationCover
               className="max-w-none rounded-none"
               date={dateTime}
@@ -81,7 +143,7 @@ export default function CreatePage() {
 
             <div className="flex flex-col items-center gap-stack-md bg-surface-default px-page-horizontal py-cover-inset">
               <Image alt="" type="flag" />
-              <p className="w-full whitespace-pre-line break-words text-center typography-body-compact tracking-preserved-1 text-guide-text-preserved-1">
+              <p className="w-full whitespace-pre-line break-keep wrap-break-word text-center typography-body-compact tracking-preserved-1 text-guide-text-preserved-1">
                 {body}
               </p>
             </div>
@@ -100,12 +162,13 @@ export default function CreatePage() {
         </section>
       </main>
 
-      {/* 발행하기 버튼은 화면 하단에 고정 (아직 동작 없음) */}
-      <div className="fixed inset-x-0 bottom-0 mx-auto w-full max-w-[375px] bg-surface-default p-page-horizontal">
+      {/* 발행하기 버튼은 화면 하단에 고정 */}
+      <div className="fixed inset-x-0 bottom-0 mx-auto w-full max-w-mobile bg-surface-default p-page-horizontal">
         <Button
           className="w-full"
           disabled={!isFilled}
           label="발행하기"
+          onClick={handlePublish}
           size="lg"
         />
       </div>

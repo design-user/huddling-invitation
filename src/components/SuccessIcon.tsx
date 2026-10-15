@@ -11,7 +11,7 @@ export default function SuccessIcon({ className = "" }: SuccessIconProps) {
       className={`inline-flex size-16 items-center justify-center rounded-pill bg-info-subtle ${className}`}
       data-name="SuccessIcon"
     >
-      <IconCheck className="size-8" />
+      <IconCheck className="size-8 text-info-strong" />
     </span>
   );
 }

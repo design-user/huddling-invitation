@@ -45,7 +45,11 @@ export default function CopyLinkField({
         <Button label="복사" onClick={copyUrl} size="sm" />
       </div>
       <p className="typography-caption-md text-text-tertiary">{description}</p>
-      <p aria-live="polite" className="typography-caption-md text-text-tertiary">
+      {/* 메시지가 없을 때는 화면에서 숨겨 빈 간격이 생기지 않게 한다 */}
+      <p
+        aria-live="polite"
+        className={message ? "typography-caption-md text-text-tertiary" : "sr-only"}
+      >
         {message}
       </p>
     </section>

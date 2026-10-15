@@ -10,7 +10,8 @@ type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "gap-control-compact py-inline-sm typography-label-md",
+  // sm은 보이는 크기는 Figma대로 두고, 누르는 영역만 위아래로 넓힌다 (48px 이상)
+  sm: "gap-control-compact py-inline-sm typography-label-md after:absolute after:inset-x-0 after:-inset-y-control-compact",
   md: "gap-inline-compact h-button-md py-control-x typography-label-md",
   lg: "gap-control-compact h-button-lg py-inline-sm typography-label-lg",
 };

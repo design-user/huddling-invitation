@@ -6,12 +6,14 @@ import IconPlus from "@/components/icon/plus";
 
 type StepperProps = {
   className?: string;
+  disabled?: boolean;
   onChange?: (value: number) => void;
   value?: number;
 };
 
 export default function Stepper({
   className = "",
+  disabled = false,
   onChange,
   value,
 }: StepperProps) {
@@ -32,13 +34,14 @@ export default function Stepper({
     >
       <StepButton
         aria-label="동반 인원 줄이기"
-        disabled={count === 0}
+        disabled={disabled || count === 0}
         onClick={() => update(Math.max(0, count - 1))}
       />
       <span className="typography-heading-md text-text-strong">{count}명</span>
       <StepButton
         aria-label="동반 인원 늘리기"
-        icon={<IconPlus className="size-5" />}
+        disabled={disabled}
+        icon={<IconPlus className="size-5" disabled={disabled} />}
         onClick={() => update(count + 1)}
       />
     </div>

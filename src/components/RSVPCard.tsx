@@ -96,7 +96,11 @@ export default function RSVPCard({
                   checked={!attending}
                   label="불참"
                   name="attendance"
-                  onChange={() => setAttendance("no")}
+                  onChange={() => {
+                    // 불참이면 동반 인원은 0명으로 맞춘다
+                    setAttendance("no");
+                    setCompanions(0);
+                  }}
                   required={false}
                   value="no"
                 />
@@ -105,7 +109,11 @@ export default function RSVPCard({
 
             <div className="flex w-full flex-col items-start gap-inline-md">
               <Label label="동반 인원" />
-              <Stepper onChange={setCompanions} value={companions} />
+              <Stepper
+                disabled={!attending}
+                onChange={setCompanions}
+                value={companions}
+              />
               <p className="typography-caption-md text-text-tertiary">
                 본인을 제외하고 함께 오는 인원이에요.
               </p>
